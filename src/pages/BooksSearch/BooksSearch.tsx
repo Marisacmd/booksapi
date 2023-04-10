@@ -16,7 +16,11 @@ const BooksSearch: React.FC = () => {
       {booksSearchStore.showNoResultsFound
         ? booksSearchStore.noResultsFoundMessage
         : null}
-      {booksSearchStore.isLoadingBooks ? <LinearProgress /> : <BooksList />}
+      {booksSearchStore.isLoadingBooks &&
+      booksSearchStore.books.length === 0 ? (
+        <LinearProgress />
+      ) : null}
+      <BooksList />
     </Container>
   );
 };

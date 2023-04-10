@@ -2,8 +2,9 @@ import React from "react";
 import booksStore from "../../store/booksStore";
 import { observer } from "mobx-react";
 import BookItem from "./BookItem/BookItem";
-import { Button, Grid } from "@mui/material";
+import { Button, CircularProgress, Grid, LinearProgress } from "@mui/material";
 import { bookItem } from "../../types/googleApiTypes";
+import booksSearchStore from "../../store/booksStore";
 
 const BooksList: React.FC = () => {
   const getMoreResults: () => void = () => {
@@ -22,6 +23,10 @@ const BooksList: React.FC = () => {
           <BookItem item={item} index={index} />
         ))}
       </div>
+      {booksSearchStore.isLoadingBooks &&
+      booksSearchStore.books.length !== 0 ? (
+        <CircularProgress />
+      ) : null}
       {booksStore.books.length > 0 ? (
         <Button variant="contained" onClick={getMoreResults}>
           Load more
